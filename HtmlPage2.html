@@ -1,0 +1,30 @@
+﻿<div id="content">
+    <script>
+             var time2 = 5;
+    </script>
+        
+    <button class="btn-default" id="back" onclick='NextPage("HtmlPage1.html")'>Назад</button>
+
+    <p>
+    <button class="btn-default" id="reset" onclick="StopProgress();Progress('HtmlPage3.html',time2);">Отсчет времени заново</button>
+    </p>
+
+    <p>
+    <button class="btn-default" id="pause" onclick="Pause('HtmlPage3.html')">Остановить</button>
+    </p>
+
+        <img class="img-thumbnail" src="Content/Images/pic2.jpg" />
+
+        <p> До конца просмотра осталось</p> 
+        <p id="LeftTime">  </p> 
+        <p>секунд </p> 
+    
+        <p>
+        <progress id="progressbar" value="0" max="5">Progress</progress> 
+        </p>     
+
+    <script>
+        Progress("HtmlPage3.html", time2);
+    </script>
+</div>
+

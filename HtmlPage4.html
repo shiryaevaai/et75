@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="StyleSheet74.css" rel="stylesheet" />   
+    <script src="Scripts/JavaScript74.js"></script>
+    <title>It's my life</title>
+</head>
+<body>
+<div id="content">
+    <script>
+        var time4 = 7;
+    </script>
+
+
+    <p>
+    <button class="btn-default" id="Button1" onclick='NextPage("HtmlPage3.html")'>Назад</button>
+    </p>
+
+    <p>
+    <button class="btn-default" id="reset" onclick="StopProgress();Progress('HtmlPage5.html',time4);">Отсчет времени заново</button>
+    </p>
+
+    <p>
+    <button class="btn-default" id="pause" onclick="Pause('HtmlPage5.html')">Остановить</button>
+    </p>
+
+    <img src="Content/Images/pic4.jpg" />
+
+    <p> До конца просмотра осталось</p> <p id="LeftTime">  </p> <p>секунд </p>     
+
+    <p>
+    <progress id="progressbar" value="0" max="7">Progress</progress> 
+    </p> 
+
+    <script>
+        Progress("HtmlPage5.html", time4);
+    </script>
+</div>
+
+</body>
+</html>

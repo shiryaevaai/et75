@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
+    <title></title>
+
+</head>
+<body>
+
+    <p>Выберите действие:</p>
+
+    <p>
+        <button class="btn-default" type="submit" value="С начала" id="submit1" onclick='ret("restart")'>С начала</button>
+    </p>
+
+    <p>
+        <button class="btn-default" type="submit" value="Завершить" id="submit2" onclick='ret("finish")'>Завершить</button>
+    </p>
+    <script>
+        function ret() {
+            if (document.getElementById('retValue1').checked) {
+                window.returnValue = document.getElementById('retValue1').value;
+                window.close();
+                return false;                
+            }
+            else if (document.getElementById('retValue2').checked) {
+                window.returnValue = document.getElementById('retValue2').value;
+                self.close();
+                return false;
+            }
+            else {
+                alert("!");
+            }
+            window.close();
+            return false;
+        }
+
+        function ret(value) {       
+                window.returnValue = value;
+                window.close();
+                //return false;          
+        }
+    </script>
+
+</body>
+</html>

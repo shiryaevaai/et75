@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="StyleSheet74.css" rel="stylesheet" />   
+    <script src="Scripts/JavaScript74.js"></script>
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <title>Braiding cat</title>
+</head>
+
+<script>
+var time3 = 3;
+</script>
+<body>
+
+    <div id="content">
+
+        <p>
+        <button class="btn-default" id="Button1" onclick='NextPage("HtmlPage2.html")'>Назад</button>
+        </p>
+
+        <p>
+        <button class="btn-default" id="reset" onclick="StopProgress();Progress('HtmlPage4.html',time3);">Отсчет времени заново</button>
+        </p>
+
+        <p>
+        <button class="btn-default" id="pause" onclick="Pause('HtmlPage4.html')">Остановить</button>
+        </p>
+
+            <img src="Content/Images/pic3.jpg" />
+
+        <p> До конца просмотра осталось</p> <p id="LeftTime">  </p> <p>секунд </p>  
+        
+    <p>
+    <progress id="progressbar" value="0" max="3">Progress</progress> 
+    </p>    
+
+        <script>
+            Progress("HtmlPage4.html", time3);
+        </script>
+    </div>
+
+</body>
+</html>

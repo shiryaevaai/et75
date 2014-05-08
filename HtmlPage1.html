@@ -1,0 +1,30 @@
+﻿<div id="content">
+    <script>
+    var time1 = 10;
+    </script>
+
+    <p>
+    <button class="btn-default" id="reset" onclick="StopProgress();Progress('HtmlPage2.html',time1);">Отсчет времени заново</button>
+    </p>
+
+    <p>
+    <button class="btn-default" id="pause" onclick="Pause('HtmlPage2.html')">Остановить</button>
+    </p>
+
+    <img class="img-thumbnail" src="Content/Images/pic1.jpg" />
+     
+    <!--<p> До конца просмотра осталось</p> <p id="LeftTime"> <script> PrintTime(time1); </script> </p> <p>секунд </p>  -->
+    <p> До конца просмотра осталось</p>
+    <p id="LeftTime">  </p> 
+    <p>секунд </p>  
+
+    <p>
+    <progress id="progressbar" value="0" max="10">Progress</progress> 
+    </p>  
+
+    <script>
+        pr = Progress("HtmlPage2.html", time1);
+    </script>
+</div>
+
+

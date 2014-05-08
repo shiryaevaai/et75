@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="StyleSheet74.css" rel="stylesheet" />   
+    <script src="Scripts/JavaScript74.js"></script>
+    <title>Severe programmer</title>
+</head>
+<body>
+
+ <div id="content">
+    
+    <p>
+    <button id="Button1" onclick='NextPage("HtmlPage4.html")'>Назад</button>
+    </p> 
+
+    <p>
+    <img src="Content/Images/pic5.jpg" />
+    </p>
+
+    <p>[ Дальнейшее действие ]</p>    
+    
+    <button onclick='return doShowModal(this)'>Показать диалог</button>
+
+  <script>      
+      function doShowModal(obj) {
+          var Result = window.showModalDialog("RestartOrExit.html", "name", "");
+          if (Result == "restart") {
+              NextPage("HtmlPage1.html");
+          }
+          else if (Result == "finish") {
+              // self.close();
+
+              //You can't close any tab via JavaScript. 
+              //This method is only allowed to be called 
+              //for windows that were opened by a script using 
+              //    the window.open method. In other words, 
+              //    you can only use JavaScript to close a window/tab 
+              //    that was spawned via JavaScript.
+
+              //var win = window.open("HtmlPage5.html");
+              //win.close();
+
+              //window.opener = null;
+              //window.close();
+
+              window.open(window.location, '_self').close();
+          }          
+      }   
+
+  </script>
+ </div>
+
+</body>
+</html>
