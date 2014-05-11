@@ -1,13 +1,24 @@
-﻿var newUrl,
+﻿// на этот адрес перейдём
+var newUrl,
+// время показа страницы
 pageTime,
+progressTime,
+// содердит SetTimeOut
 timeOutID,
+//,,,,
 pr,
 progr,
+// приостановлено ли время
 pause = false;
 
 $(document).ready(function () {
-    // StartLinks
+    // ссылки на страницы
     $('a').click(function (event) {
+        StopProgress();
+        //alert("pageTime  "+pageTime);
+        //alert("progressTime  " + progressTime);
+        //alert("timeOutID  " + timeOutID);
+
         // получили новый адрес
         var url = $(this).attr('href');
         var cont = $('#content').innerHTML;
@@ -32,48 +43,61 @@ $(document).ready(function () {
         return false;
     });
     
-    function pb() {
-        if (!Modernizr.meter) {
-            alert('Sorry your brower does not support HTML5 progress bar');
-        }
-        else {
-            alert('progress bar');
-            var progressbar = $('#progressbar'),
-            max = progressbar.attr('max'),
-            progressTime = (1000 / max) * 5,
-            value = progressbar.val();
+    //function pb() {
+    //    if (!Modernizr.meter) {
+    //        alert('Sorry your brower does not support HTML5 progress bar');
+    //    }
+    //    else {
+    //        alert('progress bar');
+    //        var progressbar = $('#progressbar'),
+    //        max = progressbar.attr('max'),
+    //        progressTime = (1000 / max) * 5,
+    //        value = progressbar.val();
 
-            var loading = function () {
-                value += 1;
-                addValue = progressbar.val(value);
+    //        var loading = function () {
+    //            value += 1;
+    //            addValue = progressbar.val(value);
 
-                if (value == max) {
-                    clearInterval(animate);
-                }
-            };
+    //            if (value == max) {
+    //                clearInterval(animate);
+    //            }
+    //        };
 
-            var animate = setInterval(function () {
-                loading();
-            }, progressTime);
-        };
-    };
+    //        var animate = setInterval(function () {
+    //            loading();
+    //        }, progressTime);
+    //    };
+    //};
 });
 
 function isHhistoryApiAvailable() {
     return !!(window.history && history.pushState);
 }
 
+//$(window).bind('popstate', function () {
+//    $.ajax({
+//        url: location.pathname + '?ajax=1',
+//        success: function (data) {
+//            StopProgress();
+//            $('#content').html(data);
+//        }
+//    });
+//});
+
 $(window).bind('popstate', function () {
+    StopProgress();
     $.ajax({
         url: location.pathname + '?ajax=1',
         success: function (data) {
-            StopProgress();
-            $('#content').html(data);
+
+            $('#content').html(data);            
         }
     });
+
 });
 
 function NextPage(url) {
+    StopProgress();
     // location.assign(address);
     // получили новый адрес
     var cont = $('#content').innerHTML;
@@ -93,7 +117,8 @@ function NextPage(url) {
         window.history.pushState(null, null, url);
     }
 
-    pageTime = undefined;
+    //pageTime = undefined;
+    //progressTime = undefined;
     // alert("it works");
     // Предотвращаем дефолтное поведение
     return false;
@@ -105,6 +130,7 @@ function Pause(addr) {
 
         pause = true;
         clearTimeout(timeOutID);
+        
         $('#pause').html('Продолжить');
     }
     else {
@@ -117,39 +143,46 @@ function Pause(addr) {
 }
 
 function Progress(addr, time) {
-    var ad = "" + addr,
-        b,
-        bar,    
+    var leftTime,    
         progressbar = $('#progressbar'),
-        max = progressbar.attr('max'),
-        progressTime = (1000 / max) * 5,
+        maxValue = progressbar.attr('max'),
+        //progressTime = 1000 ,
         value = progressbar.val();
+    
+    addr = "" + addr;
+    //alert('maxValue' + maxValue);
 
-   // alert('progress bar');
-    //alert("newUrl  " + newUrl);
-    //alert("ad  "+ad);
-    if (/(.+\.html)/.test(ad)) {
-        newUrl = "" + ad;
+    if (/(.+\.html)/.test(addr)) {
+        newUrl = "" + addr;        
+    }
+
+    time = +time;
+    if (pageTime == undefined) {
+        pageTime = +time;
+    }
+
+    if (typeof(progressTime) != "number") {
+        // progressTime = (1000 / +maxValue) * 5;
+        progressTime = +200 ;
     }
   
-    value += 1;
-    addValue = progressbar.val(value);
+    //alert('progressTime= ' + progressTime);
 
-    if (value == max) {
+    value += 1;
+    progressbar.val(value);
+
+    if (value == maxValue) {
         clearInterval(animate);
+        progressTime = undefined;
     }
 
     var animate = setInterval(function () {
         loading();
     }, progressTime);
+   // alert('progressTime= ' + progressTime);
 
-     b = +time;
-    if (pageTime == undefined) {
-        pageTime = +b;
-    }
-
-    bar = document.getElementById("LeftTime");
-    bar.innerHTML = pageTime;
+    leftTime = document.getElementById("LeftTime");
+    leftTime.innerHTML = pageTime;
     pageTime--;
 
     if (pageTime > 0) {
@@ -163,7 +196,9 @@ function Progress(addr, time) {
 function StopProgress() {
     clearTimeout(timeOutID);
     pageTime = undefined;
-    $('#progressbar').val = 0;
-        
+    progressTime = undefined;
+    timeOutID = undefined;
+    //$('#progressbar').val = 0;
+    $('#progressbar').val(0);        
 }
 
